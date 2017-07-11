@@ -14,17 +14,25 @@ var MapService = function () {
      * @param height
      */
     this.initMapService = function (width, height) {
-        _svg = d3.select("body").append("div").classed("svg-container", true)
+        var zoom = d3.zoom().scaleExtent([0.25, 3]).on("zoom", zoomed);
+
+        var container = d3.select("body").append("div").classed("svg-container", true)
             .append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "0 0 "+ width +" "+ height)
-            .classed("svg-content-responsive", true);
+            .classed("svg-content-responsive", true).call(zoom);
+
+        _svg = d3.select("svg").append("g").attr("class", "container");
 
         _projection = d3.geoMercator()
             .center([-122.43, 37.77])
             .scale(450000)
             .translate([width / 2, height / 2]);
         _geoPath = d3.geoPath().projection(_projection);
+    }
+
+    var zoomed = function () {
+        _svg.attr("transform", d3.event.transform);
     }
 
     /**
