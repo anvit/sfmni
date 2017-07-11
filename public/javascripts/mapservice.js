@@ -14,7 +14,7 @@ var MapService = function () {
      * @param height
      */
     this.initMapService = function (width, height) {
-        var zoom = d3.zoom().scaleExtent([0.25, 3]).on("zoom", zoomed);
+        var zoom = d3.zoom().scaleExtent([0.25, 3]).on("zoom", _zoomed);
 
         var container = d3.select("body").append("div").classed("svg-container", true)
             .append("svg")
@@ -31,7 +31,7 @@ var MapService = function () {
         _geoPath = d3.geoPath().projection(_projection);
     }
 
-    var zoomed = function () {
+    var _zoomed = function () {
         _svg.attr("transform", d3.event.transform);
     }
 
