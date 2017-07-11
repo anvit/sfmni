@@ -67,7 +67,7 @@ var SfMuniApp = function() {
     }
 
     var _pollForMapLoaded = function() {
-        var endTime = Number(new Date()) + 2000;
+        var endTime = Number(new Date()) + 60000;
         var interval = 30;
         var checkCondition = function(resolve, reject) {
             var result = _map.getMapLoaded() === true;
